@@ -331,7 +331,7 @@ Item {
     }
 
     // Placed in the window's header strip (Window.headerItem), after the
-    // close/minimize/zoom buttons, so it gets the clicks
+    // close/minimize/zoom buttons, so it fades with the header
     property Item headerTools: RowLayout {
         visible: viewer.active
         spacing: LingmoUI.Units.smallSpacing / 2

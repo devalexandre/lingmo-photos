@@ -42,82 +42,6 @@ Item {
 
     readonly property bool showingGrid: sideBar.currentIndex !== pageFolders || openFolder.length > 0
 
-    // Placed in the window's header strip (Window.headerItem), next to the
-    // close/minimize/zoom buttons: search, thumbnail size, slideshow, refresh
-    property Item headerTools: Item {
-        id: headerTools
-        visible: !rootWindow.viewerOpen
-        // Where this strip starts in the window, to line the back button up with the page
-        readonly property real originX: {
-            width
-            return mapToItem(null, 0, 0).x
-        }
-
-        LingmoUI.IconButton {
-            id: backButton
-            x: LingmoUI.Units.sideBarWidth + LingmoUI.Units.largeSpacing * 2 - headerTools.originX - LingmoUI.Units.smallSpacing
-            anchors.verticalCenter: parent.verticalCenter
-            visible: page.openFolder.length > 0
-            iconName: "go-previous"
-            tipText: qsTr("Back to Folders")
-            onClicked: {
-                page.openFolder = ""
-                page.syncFilters()
-            }
-        }
-
-        RowLayout {
-            anchors.right: parent.right
-            anchors.rightMargin: LingmoUI.Units.largeSpacing * 2
-            anchors.verticalCenter: parent.verticalCenter
-            spacing: LingmoUI.Units.smallSpacing
-
-            TextField {
-                id: searchField
-                Layout.preferredWidth: 200
-                Layout.preferredHeight: LingmoUI.Units.smallControlHeight + 2
-                visible: page.showingGrid
-                placeholderText: qsTr("Search name, folder or date")
-                selectByMouse: true
-                onTextChanged: searchTimer.restart()
-                Keys.onEscapePressed: text = ""
-                Timer {
-                    id: searchTimer
-                    interval: 200
-                    onTriggered: library.searchText = searchField.text
-                }
-            }
-
-            LingmoUI.SegmentedControl {
-                visible: page.showingGrid
-                model: [{ iconName: "view-list-icons", text: "" },
-                        { iconName: "view-grid", text: "" },
-                        { iconName: "zoom-in", text: "" }]
-                currentIndex: page.gridSize
-                onActivated: index => page.gridSize = index
-                ToolTip.visible: sizeHover.hovered
-                ToolTip.delay: 600
-                ToolTip.text: qsTr("Thumbnail size")
-                HoverHandler { id: sizeHover }
-            }
-
-            LingmoUI.IconButton {
-                iconName: "media-playback-start"
-                tipText: qsTr("Slideshow")
-                visible: page.showingGrid
-                enabled: library.count > 0
-                onClicked: page.slideshow()
-            }
-
-            LingmoUI.IconButton {
-                iconName: "view-refresh"
-                tipText: qsTr("Look for new photos")
-                enabled: !library.scanning
-                onClicked: library.rescan()
-            }
-        }
-    }
-
     function reveal(path) {
         const index = library.indexOfPath(path)
         if (index >= 0)
@@ -174,13 +98,18 @@ Item {
                 anchors.rightMargin: LingmoUI.Units.largeSpacing * 2
                 spacing: LingmoUI.Units.largeSpacing
 
-                // Title only: the header strip of the window sits on top of it
-                // and takes the clicks (the tools live in headerTools)
+                // Title and tools, in the window's header strip (the strip only
+                // takes the presses nothing here takes)
                 LingmoUI.PageHeader {
                     id: pageHeader
                     Layout.fillWidth: true
                     Layout.topMargin: LingmoUI.Units.smallSpacing
-                    leftPadding: page.openFolder.length > 0 ? backButton.width + LingmoUI.Units.smallSpacing : 0
+                    backVisible: page.openFolder.length > 0
+                    backTipText: qsTr("Back to Folders")
+                    onBack: {
+                        page.openFolder = ""
+                        page.syncFilters()
+                    }
                     title: page.openFolder.length > 0 ? page.openFolderName
                          : sideBar.currentIndex === page.pageFavorites ? qsTr("Favorites")
                          : sideBar.currentIndex === page.pageFolders ? qsTr("Folders")
@@ -191,6 +120,50 @@ Item {
                         if (sideBar.currentIndex === page.pageFolders && page.openFolder.length === 0)
                             return foldersPage.count === 1 ? qsTr("1 folder") : qsTr("%1 folders").arg(foldersPage.count)
                         return rootWindow.photoCount(library.count)
+                    }
+
+                    TextField {
+                        id: searchField
+                        Layout.preferredWidth: 200
+                        Layout.preferredHeight: LingmoUI.Units.smallControlHeight + 2
+                        visible: page.showingGrid
+                        placeholderText: qsTr("Search name, folder or date")
+                        selectByMouse: true
+                        onTextChanged: searchTimer.restart()
+                        Keys.onEscapePressed: text = ""
+                        Timer {
+                            id: searchTimer
+                            interval: 200
+                            onTriggered: library.searchText = searchField.text
+                        }
+                    }
+
+                    LingmoUI.SegmentedControl {
+                        visible: page.showingGrid
+                        model: [{ iconName: "view-list-icons", text: "" },
+                                { iconName: "view-grid", text: "" },
+                                { iconName: "zoom-in", text: "" }]
+                        currentIndex: page.gridSize
+                        onActivated: index => page.gridSize = index
+                        ToolTip.visible: sizeHover.hovered
+                        ToolTip.delay: 600
+                        ToolTip.text: qsTr("Thumbnail size")
+                        HoverHandler { id: sizeHover }
+                    }
+
+                    LingmoUI.IconButton {
+                        iconName: "media-playback-start"
+                        tipText: qsTr("Slideshow")
+                        visible: page.showingGrid
+                        enabled: library.count > 0
+                        onClicked: page.slideshow()
+                    }
+
+                    LingmoUI.IconButton {
+                        iconName: "view-refresh"
+                        tipText: qsTr("Look for new photos")
+                        enabled: !library.scanning
+                        onClicked: library.rescan()
                     }
                 }
 

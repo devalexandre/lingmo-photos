@@ -47,6 +47,7 @@ static void applyIconTheme()
     const bool dark = theme.value(QStringLiteral("DarkMode"), false).toBool();
     const QStringList candidates = {
         theme.value(dark ? QStringLiteral("DarkIconTheme") : QStringLiteral("IconTheme")).toString(),
+        dark ? QStringLiteral("Lingmo-dark") : QStringLiteral("Lingmo"),
         dark ? QStringLiteral("Crule-dark") : QStringLiteral("Crule"),
         QStringLiteral("breeze"),
     };
@@ -67,7 +68,7 @@ int main(int argc, char *argv[])
     app.setApplicationName(QStringLiteral("lingmo-photos"));
     app.setApplicationVersion(QStringLiteral(LINGMO_PHOTOS_VERSION));
     app.setDesktopFileName(QStringLiteral("lingmo-photos"));
-    app.setWindowIcon(QIcon::fromTheme(QStringLiteral("multimedia-photo-viewer"),
+    app.setWindowIcon(QIcon::fromTheme(QStringLiteral("lingmo-photos"),
                                        QIcon::fromTheme(QStringLiteral("image-viewer"))));
     applyIconTheme();
 

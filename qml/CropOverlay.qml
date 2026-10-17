@@ -69,7 +69,7 @@ Item {
     onBoundsChanged: reset()
 
     // Dimmed photo outside the selection
-    readonly property color shade: Qt.rgba(0, 0, 0, 0.55)
+    readonly property color shade: LingmoUI.Theme.overlayBackgroundColor
     Rectangle { x: 0; y: 0; width: parent.width; height: overlay.selY; color: overlay.shade }
     Rectangle { x: 0; y: overlay.selY + overlay.selH; width: parent.width; height: parent.height - y; color: overlay.shade }
     Rectangle { x: 0; y: overlay.selY; width: overlay.selX; height: overlay.selH; color: overlay.shade }
@@ -161,7 +161,7 @@ Item {
                 width: handle.modelData.hx === 0 ? 22 : 6
                 height: handle.modelData.hy === 0 ? 22 : 6
                 radius: 3
-                color: "white"
+                color: LingmoUI.Theme.overlayTextColor
                 visible: !handle.corner
             }
             // L-shaped bracket inside the selection, its corner on the selection corner
@@ -172,7 +172,7 @@ Item {
                 width: 22
                 height: 4
                 radius: 1
-                color: "white"
+                color: LingmoUI.Theme.overlayTextColor
             }
             Rectangle {
                 visible: handle.corner
@@ -181,7 +181,7 @@ Item {
                 width: 4
                 height: 22
                 radius: 1
-                color: "white"
+                color: LingmoUI.Theme.overlayTextColor
             }
 
             MouseArea {

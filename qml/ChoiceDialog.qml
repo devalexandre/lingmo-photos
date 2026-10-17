@@ -56,7 +56,7 @@ Popup {
     }
 
     Overlay.modal: Rectangle {
-        color: Qt.rgba(0, 0, 0, 0.35)
+        color: LingmoUI.Theme.overlayScrimColor
         Behavior on opacity { NumberAnimation { duration: LingmoUI.Units.shortDuration } }
     }
 

@@ -89,7 +89,7 @@ Item {
         Rectangle {
             anchors.fill: parent
             gradient: Gradient {
-                GradientStop { position: 0.0; color: Qt.rgba(0, 0, 0, 0.35) }
+                GradientStop { position: 0.0; color: LingmoUI.Theme.overlayScrimColor }
                 GradientStop { position: 0.35; color: "transparent" }
             }
             opacity: control.hovered || control.selectionMode ? 1 : 0

@@ -45,8 +45,9 @@ LingmoUI.Window {
     background.color: viewerOpen ? stageColor : LingmoUI.Theme.backgroundColor
     header.height: LingmoUI.Units.windowHeaderHeight
     contentTopMargin: 0
-    // The header strip holds each page's tools; in the viewer it fades with the controls
-    headerItem: viewerOpen ? viewer.headerTools : (libraryLoader.item ? libraryLoader.item.headerTools : null)
+    // In the viewer the header strip holds its tools and fades with the controls;
+    // the library puts its tools in its own page header, under the strip
+    headerItem: viewerOpen ? viewer.headerTools : null
     headerBackground.color: viewerOpen ? Qt.rgba(LingmoUI.Theme.backgroundColor.r, LingmoUI.Theme.backgroundColor.g,
                                                  LingmoUI.Theme.backgroundColor.b, 0.94)
                                        : "transparent"
