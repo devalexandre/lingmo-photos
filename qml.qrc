@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/Main.qml</file>
+        <file>qml/LibraryPage.qml</file>
+        <file>qml/PhotoGrid.qml</file>
+        <file>qml/FoldersPage.qml</file>
+        <file>qml/Thumbnail.qml</file>
+        <file>qml/Viewer.qml</file>
+        <file>qml/ZoomView.qml</file>
+        <file>qml/CropOverlay.qml</file>
+        <file>qml/InfoPanel.qml</file>
+        <file>qml/ChoiceDialog.qml</file>
+        <file>images/photos.svg</file>
+        <file>images/favorites.svg</file>
+        <file>images/folders.svg</file>
+        <file>images/favorite-on.svg</file>
+        <file>images/check.svg</file>
+        <file>images/heart-outline-light.svg</file>
+        <file>images/heart-outline-dark.svg</file>
+    </qresource>
+</RCC>
