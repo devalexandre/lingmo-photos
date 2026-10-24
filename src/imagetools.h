@@ -33,6 +33,8 @@ class ImageTools : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString lastError READ lastError NOTIFY lastErrorChanged)
+    // Lingmo Share is installed: "Send to nearby device"
+    Q_PROPERTY(bool nearbyShareAvailable READ nearbyShareAvailable CONSTANT)
 
 public:
     explicit ImageTools(QObject *parent = nullptr);
@@ -60,6 +62,9 @@ public:
     Q_INVOKABLE bool setWallpaper(const QString &path);
     Q_INVOKABLE void copyToClipboard(const QString &path);
     Q_INVOKABLE void showInFolder(const QString &path);
+    bool nearbyShareAvailable() const;
+    // Asks Lingmo Share where to send the picture (phone, tablet, computer)
+    Q_INVOKABLE void sendNearby(const QString &path);
 
     // [{ id, name, icon }] of the apps that open this type, without us
     Q_INVOKABLE QVariantList openWithApps(const QString &path) const;

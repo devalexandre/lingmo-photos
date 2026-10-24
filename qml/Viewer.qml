@@ -447,6 +447,13 @@ Item {
             }
         }
         MenuItem {
+            visible: tools.nearbyShareAvailable
+            height: visible ? implicitHeight : 0
+            text: qsTr("Send to Nearby Device…")
+            icon.name: "document-send"
+            onTriggered: tools.sendNearby(viewer.currentPath)
+        }
+        MenuItem {
             text: qsTr("Show in Folder")
             icon.name: "folder-open"
             onTriggered: tools.showInFolder(viewer.currentPath)

@@ -327,6 +327,10 @@
 <context>
     <name>Viewer</name>
     <message>
+        <source>Send to Nearby Device…</source>
+        <translation>Enviar para dispositivo próximo…</translation>
+    </message>
+    <message>
         <source>Save the rotated photo?</source>
         <translation>Salvar a foto girada?</translation>
     </message>

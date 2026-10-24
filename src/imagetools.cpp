@@ -36,6 +36,7 @@
 #include <QLocale>
 #include <QMimeData>
 #include <QMimeDatabase>
+#include <QProcess>
 #include <QSaveFile>
 #include <QStandardPaths>
 #include <QTransform>
@@ -340,6 +341,16 @@ void ImageTools::copyToClipboard(const QString &path)
     if (!image.isNull())
         mime->setImageData(image);
     QGuiApplication::clipboard()->setMimeData(mime);
+}
+
+bool ImageTools::nearbyShareAvailable() const
+{
+    return !QStandardPaths::findExecutable(QStringLiteral("lingmo-share")).isEmpty();
+}
+
+void ImageTools::sendNearby(const QString &path)
+{
+    QProcess::startDetached(QStringLiteral("lingmo-share"), {QStringLiteral("send"), QStringLiteral("--pick"), path});
 }
 
 void ImageTools::showInFolder(const QString &path)
