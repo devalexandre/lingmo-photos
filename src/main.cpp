@@ -17,6 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifdef HAVE_LINGMO_INTENTS
+#include "photosintents.h"
+#endif
 #include <QCommandLineParser>
 #include <QDir>
 #include <QFileInfo>
@@ -64,6 +67,11 @@ static void applyIconTheme()
 
 int main(int argc, char *argv[])
 {
+#ifdef HAVE_LINGMO_INTENTS
+    // photos.open for the Assistant, Flows and Spotlight (D-Bus activation)
+    if (PhotosIntents::requested(argc, argv))
+        return PhotosIntents::run(argc, argv);
+#endif
     QGuiApplication app(argc, argv);
     app.setApplicationName(QStringLiteral("lingmo-photos"));
     app.setApplicationVersion(QStringLiteral(LINGMO_PHOTOS_VERSION));

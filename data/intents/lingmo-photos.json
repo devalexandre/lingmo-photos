@@ -1,0 +1,85 @@
+{
+  "format": "lingmo-intents",
+  "version": 1,
+  "app": "lingmo-photos",
+  "name": {
+    "en": "Photos",
+    "pt_BR": "Fotos"
+  },
+  "icon": "lingmo-photos",
+  "desktop": "lingmo-photos.desktop",
+  "dbus": {
+    "service": "com.lingmo.Photos",
+    "path": "/Intents"
+  },
+  "intents": [
+    {
+      "id": "photos.open",
+      "title": {
+        "en": "Open in Photos",
+        "pt_BR": "Abrir no Fotos"
+      },
+      "description": {
+        "en": "Shows a picture, or the pictures of a folder, in Lingmo Photos.",
+        "pt_BR": "Mostra uma imagem, ou as imagens de uma pasta, no Lingmo Fotos."
+      },
+      "summary": {
+        "en": "Open {path} in Photos",
+        "pt_BR": "Abrir {path} no Fotos"
+      },
+      "icon": "image-x-generic",
+      "capabilities": [
+        "read"
+      ],
+      "needsUI": true,
+      "assistantTool": "desktop_actions",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "format": "file",
+            "title": {
+              "en": "Picture or folder",
+              "pt_BR": "Imagem ou pasta"
+            }
+          },
+          "slideshow": {
+            "type": "boolean",
+            "default": false,
+            "title": {
+              "en": "Start a slideshow",
+              "pt_BR": "Iniciar apresentação"
+            }
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "result": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "title": {
+              "en": "Opened",
+              "pt_BR": "Aberto"
+            }
+          }
+        }
+      },
+      "examples": {
+        "pt_BR": [
+          "abrir foto {path}",
+          "mostrar fotos de {path}",
+          "abrir {path} no fotos"
+        ],
+        "en": [
+          "open photo {path}",
+          "show pictures in {path}"
+        ]
+      }
+    }
+  ]
+}

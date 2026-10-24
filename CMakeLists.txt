@@ -50,6 +50,17 @@ add_custom_target(translations ALL DEPENDS ${QM_FILES})
 install(FILES ${QM_FILES} DESTINATION ${TRANSLATIONS_DIR})
 
 install(TARGETS lingmo-photos RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+# Lingmo Intents: photos.open on com.lingmo.Photos /Intents (`lingmo-photos --intents`)
+find_package(LingmoIntents 1.0 QUIET)
+if(LingmoIntents_FOUND)
+    target_sources(lingmo-photos PRIVATE src/photosintents.cpp src/photosintents.h)
+    target_compile_definitions(lingmo-photos PRIVATE HAVE_LINGMO_INTENTS)
+    target_link_libraries(lingmo-photos PRIVATE LingmoIntents::LingmoIntents)
+    lingmo_install_intents(MANIFEST data/intents/lingmo-photos.json SERVICE data/com.lingmo.Photos.service)
+else()
+    message(WARNING "LingmoIntents not found: Photos is built without app actions (intents)")
+endif()
 install(FILES lingmo-photos.desktop DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
 
 if(BUILD_TESTING)

@@ -534,4 +534,15 @@
         <translation>O arquivo pode estar danificado ou o formato não é suportado.</translation>
     </message>
 </context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>File not found: %1</source>
+        <translation>Arquivo não encontrado: %1</translation>
+    </message>
+    <message>
+        <source>This file is not a picture.</source>
+        <translation>Este arquivo não é uma imagem.</translation>
+    </message>
+</context>
 </TS>

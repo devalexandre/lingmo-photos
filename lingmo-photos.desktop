@@ -15,3 +15,4 @@ Categories=Graphics;Viewer;Photography;Qt;
 MimeType=image/jpeg;image/pjpeg;image/png;image/apng;image/webp;image/gif;image/bmp;image/x-bmp;image/x-ms-bmp;image/tiff;image/avif;image/heic;image/heif;image/jxl;image/svg+xml;image/svg+xml-compressed;image/x-tga;image/x-portable-pixmap;image/qoi;
 Keywords=photo;picture;image;viewer;gallery;slideshow;wallpaper;
 Keywords[pt_BR]=foto;imagem;figura;visualizador;galeria;apresentação;papel de parede;
+X-Lingmo-Intents=photos.open;
